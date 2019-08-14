@@ -2,9 +2,8 @@
 
 - name: install deps
   apt:
-    pkg: "{{ item }}"
-    state: latest
-  with_items:
-    - mosquitto
-    - mosquitto-clients
-    - mosquitto-dev
+    pkg:
+      - mosquitto
+      - mosquitto-clients
+      - mosquitto-dev
+    state: present

@@ -1,17 +1,22 @@
 ---
 
-- name: stop dhcp client
+- name: disable wpa supplicant
+  systemd:
+    name: wpa_supplicant
+    state: stopped
+    enabled: no
+
+- name: disable dhcp client
   systemd:
     name: dhcpcd
     state: stopped
     enabled: no
 
-- name: install dhcp server
+- name: install networking deps
   apt:
-    pkg: "{{ item }}"
-    state: latest
-  with_items:
-    - isc-dhcp-server
+    pkg:
+      - isc-dhcp-server
+    state: present
 
 - name: add DHCP daemon configs
   template:
