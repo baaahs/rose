@@ -1,0 +1,24 @@
+---
+
+- name: compute hashed baaahs user account password
+  command: "openssl passwd -salt {{ openssl_salt }} -1 {{ baaahs_password }}"
+  register: hashed_baaahs_password
+
+- name: add baaahs user
+  user:
+    name: '{{ baaahs_username }}'
+    shell: /bin/bash
+    groups: "sudo,audio,video,i2c"
+    append: yes
+    password: "{{ hashed_baaahs_password.stdout }}"
+
+- name: enable passwordless sudo-ing for baaahs
+  template:
+    src: 011_baaahs-nopasswd.j2
+    dest: /etc/sudoers.d/011_baaahs-nopasswd
+    owner: root
+    group: root
+    mode: 'u+r,g+r'
+
+- include: chat.yml
+- include: sparklemotion.yml

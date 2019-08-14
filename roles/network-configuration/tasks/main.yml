@@ -1,0 +1,31 @@
+---
+
+- name: stop dhcp client
+  systemd:
+    name: dhcpcd
+    state: stopped
+    enabled: no
+
+- name: install dhcp server
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+  with_items:
+    - isc-dhcp-server
+
+- name: add DHCP daemon configs
+  template:
+    src: dhcpd.j2
+    dest: /etc/dhcp/dhcpd.conf
+    owner: root
+    group: root
+    mode: 'u=rw,g=r,o=r'
+
+- name: install custom interfaces
+  template:
+    src: interfaces.j2
+    dest: /etc/network/interfaces.d/eth0
+    owner: root
+    group: root
+    mode: 'u=rw,g=r,o=r'
+  notify: restart networking

@@ -1,0 +1,73 @@
+timezone: US/Pacific
+keyboard_layout: us
+locale: en_US.UTF-8
+openssl_salt: bL_rp019
+baaahs_username: baaahs
+baaahs_password: armadillo
+total_net_cidr: 192.168.0.0/18
+sheep_networks:
+  - name: sheep_network_hardware
+    cidr: 192.168.1.0/24
+  - name: sheep_mgmt_trusted
+    cidr: 192.168.3.0/24
+  - name: sheep_public_other_untrusted
+    cidr: 192.168.4.0/24
+  - name: sheep_wired_brains
+    cidr: 192.168.5.0/24
+  - name: sheep_wireless_brains
+    cidr: 192.168.6.0/24
+  - name: sheep_village_interconnect_device
+    cidr: 192.168.10.0/24
+village_networks:
+  - name: village_network_hardware
+    cidr: 192.168.11.0/24
+  - name: village_mgmt_trusted
+    cidr: 192.168.12.0/24
+  - name: village_public_other_untrusted
+    cidr: 192.168.13.0/24
+  - name: village_art
+    cidr: 192.168.14.0/24
+sheep_dhcp_reservations:
+  - name: sheep-cloud-key
+    ip: 192.168.1.30
+    mac: 18:E8:29:BC:2D:95
+  - name: sheep-48-a
+    ip: 192.168.1.41
+    mac: 18:e8:29:44:7c:fe
+  - name: sheep-48-b
+    ip: 192.168.1.42
+    mac: 18:e8:29:44:86:3d
+  - name: sheep-48-c
+    ip: 192.168.1.43
+    mac: 74:83:c2:12:aa:db
+  - name: sheep-48-d
+    ip: 192.168.1.44
+    mac: 18:e8:29:44:84:15
+  - name: sheep-16
+    ip: 192.168.1.31
+    mac: b4:fb:e4:b6:78:a8
+  - name: sheep-mesh-a
+    ip: 192.168.1.51
+    mac: 18:e8:29:50:86:b2
+  - name: sheep-mesh-b
+    ip: 192.168.1.52
+    mac: 18:e8:29:50:89:6a
+  - name: sheep-bullet
+    ip: 192.168.1.60
+    mac: FC:EC:DA:64:84:6B
+village_dhcp_reservations:
+  - name: village-cloud-key
+    ip: 192.168.11.30
+    mac: 74:83:C2:13:D1:3F
+  - name: village-16
+    ip: 192.168.11.31
+    mac: b4:fb:e4:b6:7e:66
+  - name: village-mesh-a
+    ip: 192.168.11.51
+    mac:
+  - name: village-airmax
+    ip: 192.168.11.61
+    mac: 18:E8:29:34:B9:8D
+  - name: village-bullet
+    ip: 192.168.11.60
+    mac: FC:EC:DA:64:83:98

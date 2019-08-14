@@ -1,0 +1,56 @@
+---
+
+#- name: Update all packages to the latest version
+#  apt:
+#    update_cache: yes
+#    upgrade: dist
+
+- name: setting locale to {{ locale }}
+  locale_gen:
+    name: '{{ locale }}'
+    state: present
+
+- name: set timezone to {{ timezone }}
+  timezone: name={{ timezone }}
+
+- name: set keyboard layout to {{ keyboard_layout }}
+  lineinfile:
+    dest: /etc/default/keyboard
+    regexp: '^XKBLAYOUT=.*$'
+    line: 'XKBLAYOUT="{{ keyboard_layout }}"'
+  register: keyboard_layout_result
+
+- name: activate keyboard layout {{ keyboard_layout }}
+  shell: "dpkg-reconfigure -f noninteractive keyboard-configuration"
+  when: keyboard_layout_result.changed
+
+- name: install basic set of packages
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+  with_items:
+    - git
+    - rpi-update
+    - vim
+    - htop
+    - lsof
+    - tree
+    - jq
+
+#- name: run rpi-update
+#  shell: rpi-update
+#  ignore_errors: True
+
+- name: Remove the ssh warning about the default pi password
+  file:
+    path: /etc/profile.d/sshpwd.sh
+    state: absent
+
+- name: disable print lastlog
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '^PrintLastLog yes'
+    line: 'PrintLastLog no'
+
+- name: Restart ssh
+  service: name=ssh state=restarted

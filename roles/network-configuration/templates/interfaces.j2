@@ -1,0 +1,6 @@
+auto eth0
+iface eth0 inet static
+address 192.168.1.1
+netmask {{ total_net_cidr | ipaddr('netmask') }}
+network {{ total_net_cidr | ipaddr('network') }}
+broadcast {{ total_net_cidr | ipaddr('broadcast') }}

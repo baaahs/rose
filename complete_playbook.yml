@@ -1,0 +1,8 @@
+---
+
+- hosts: baaahs-lights-server
+  roles:
+    - setup
+    - network-configuration
+    - baaahs-services
+  become: yes

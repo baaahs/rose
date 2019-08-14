@@ -1,0 +1,2 @@
+    [baaahs-lights-server]
+pinky.local ansible_user=pi

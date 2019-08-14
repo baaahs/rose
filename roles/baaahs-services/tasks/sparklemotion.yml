@@ -1,0 +1,8 @@
+---
+
+- name: install deps
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+  with_items:
+    - openjdk-11-jre-headless
