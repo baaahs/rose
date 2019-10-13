@@ -44,18 +44,18 @@ To build a server do the following:
   - Boot up your PI w/ a USB keyboard and mouse, select installation of Raspbian Lite and select the keyboard layout of US.
   - Restart your PI once the installation of Raspbian has finished.
   - Login to your PI using the credentials (user: pi, password: raspberry)
-  - Run `sudo raspi-config`, select `Interfacing Options` and enable SSH, select the option to change the server name. Set the name to `baaahslights`
+  - Run `sudo raspi-config`, select `Interfacing Options` and enable SSH, select the option to change the server name. Set the name to `pinky`
   - Reboot
     
-You should now be able to SSH into the PI: `ssh pi@baaahslights.local`. While you can SSH to the PI via password authentication, Ansible prefers not to and
-  will complain if you try to. To avoid this, copy your public key to the PI to complete setup either manually or using `ssh-copy-id pi@baaahslights.local` (defaults to default public key).   
+You should now be able to SSH into the PI: `ssh pi@pinky.local`. While you can SSH to the PI via password authentication, Ansible prefers not to and
+  will complain if you try to. To avoid this, copy your public key to the PI to complete setup either manually or using `ssh-copy-id pi@pinky.local` (defaults to default public key).   
  
 # EXECUTE PLAYBOOK
 First, install [ansible](http://docs.ansible.com/ansible/index.html) via brew; `brew install ansible` or via a binary/installer of your choice.
 
-Next, execute this playbook against the `baaahslights.local` server, using a vault password obtained by contacting [Josh Durbin](https://github.com/joshdurbin).
+Next, execute this playbook against the `pinky.local` server, using a vault password obtained by contacting [Josh Durbin](https://github.com/joshdurbin).
 
-Ex: `./build_baaahs_lights_server.sh`
+Ex: `ansible-playbook ./complete_playbook.yml -i inventory.dist --timeout=30`
  
 # ADMINISTRATION OF THE SERVER
 There are three pathways onto the Raspberry PI lights server...
